@@ -4,12 +4,11 @@
  * - content
  *
  * Class ForwardIndex
- * - ctor (files?: File[])
- *
+ * 
  *   Writes index file to disk if files are in ctor. Otherwise loads index
  *   from disk
- * - build()
- * - isBuilt: boolean
+ * - update(files?: File[])
+ * - isUpdated: boolean
  *
  *   Search only by full filename. Returns a list of words.
  *   Throws an error is no index is built
@@ -22,8 +21,8 @@
  *
  * Writes index file to disk if files are in ctor. Otherwise loads index
  *   from disk
- * - build()
- * - isBuilt: boolean
+ * - update()
+ * - isUpdated: boolean
  *
  *   Search only by full filename. Returns a list of Files the word is on.
  *   Throws an error is no index is built

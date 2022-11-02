@@ -1,8 +1,8 @@
-import { File } from '../models/File';
-import { Index } from './Index';
+import { File } from '../../models/File';
+import { Index } from '../Index';
 
 export class ForwardIndex extends Index<string> {
-  build(files?: File[]): void {
+  update(files?: File[]): Promise<void> {
     throw new Error('Method not implemented.');
   }
   search(filename: string): string[] {

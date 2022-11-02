@@ -2,7 +2,7 @@ import { File } from '../models/File';
 import { Index } from './Index';
 
 export class InvertedIndex extends Index<File> {
-  build(files?: File[]): void {
+  update(files?: File[]): Promise<void> {
     throw new Error('Method not implemented.');
   }
   search(word: string): File[] {
