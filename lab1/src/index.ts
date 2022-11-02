@@ -16,7 +16,7 @@
  * - search(query: string): string[]
  *
  * - index: Map<string, File[]>
- * 
+ *
  * Class InvertedIndex
  * - ctor (files?: File[])
  *
@@ -32,4 +32,6 @@
  * - index: Map<string, File[]>
  */
 
-export {};
+import { readFiles } from './readFiles';
+
+readFiles().then(console.log);
