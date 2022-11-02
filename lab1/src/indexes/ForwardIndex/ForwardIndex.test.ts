@@ -26,6 +26,8 @@ jest.mock('fs', () => ({
   },
 }));
 
+(fs.promises.readFile as jest.Mock).mockResolvedValue(indexFileContent);
+
 describe('ForwardIndex', () => {
   it('should generate index and write it to file', async () => {
     const index = new ForwardIndex();
@@ -40,10 +42,8 @@ describe('ForwardIndex', () => {
 
   it('should read index from file if no files supplied', async () => {
     const index = new ForwardIndex();
-    (fs.promises.readFile as jest.Mock).mockResolvedValue(indexFileContent);
     await index.update();
     expect(index.isUpdated).toBe(true);
-    expect(index.search('file2.txt')).toEqual(['ipsum', '2']);
   });
 
   it('should throw an error if no index is updated', () => {
@@ -58,9 +58,18 @@ describe('ForwardIndex', () => {
     expect(index.isUpdated).toBe(true);
   });
 
-  it('should return null if no file found', async () => {
+  describe('search', () => {
     const index = new ForwardIndex();
-    await index.update(files);
-    expect(index.search('no-such-file.txt')).toBeNull();
+
+    it('should return words found by filename', async () => {
+      await index.update(files);
+      expect(index.search('file2.txt')).toEqual(['ipsum', '2']);
+      expect(index.search('file3.txt')).toEqual(['world', 'qwe']);
+    });
+
+    it('should return null if no file found', async () => {
+      await index.update(files);
+      expect(index.search('no-such-file.txt')).toBeNull();
+    });
   });
 });
