@@ -3,7 +3,7 @@ import fs from 'fs';
 import { File } from '../../models/File';
 import { Index } from '../Index';
 
-export class ForwardIndex extends Index<string> {
+export class ForwardIndex extends Index {
   protected indexFilePath: string;
 
   protected filesToIndex(files: File[]): Record<string, string[]> {

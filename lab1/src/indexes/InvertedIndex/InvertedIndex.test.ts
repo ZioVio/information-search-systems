@@ -16,9 +16,9 @@ const indexFileContent = JSON.stringify({
   '1': ['file1.txt'],
   ipsum: ['file2.txt', 'file3.txt'],
   '2': ['file2.txt', 'file4.txt'],
+  hello: ['file2.txt', 'file4.txt'],
   world: ['file3.txt'],
   qwe: ['file3.txt'],
-  hello: ['file4.txt', 'file2.txt'],
   linux: ['file4.txt'],
   '3': ['file4.txt'],
   putin: ['file5.txt'],
@@ -67,10 +67,10 @@ describe('InvertedIndex', () => {
   describe('search', () => {
     const index = new InvertedIndex();
 
-    it('should return files found by word', async () => {
+    it('should return files found by word and ignore case', async () => {
       await index.update(files);
-      expect(index.search('lorem')).toEqual(['file1.txt', 'file5.txt']);
-      expect(index.search('world')).toEqual(['file3.txt']);
+      expect(index.search('Lorem')).toEqual(['file1.txt', 'file5.txt']);
+      expect(index.search('WorlD')).toEqual(['file3.txt']);
     });
 
     it('should return null if no word found', async () => {

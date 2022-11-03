@@ -2,8 +2,8 @@ import fs from 'fs';
 import { CACHE_DIR } from '../config';
 import { File } from '../models/File';
 
-export abstract class Index<T extends File | string> {
-  protected _index: Record<string, T[]>;
+export abstract class Index {
+  protected _index: Record<string, string[]>;
   protected _isUpdated: boolean;
   protected abstract indexFilePath: string;
 
@@ -12,7 +12,7 @@ export abstract class Index<T extends File | string> {
     this._isUpdated = false;
   }
 
-  protected async loadIndex(): Promise<Record<string, T[]>> {
+  protected async loadIndex(): Promise<Record<string, string[]>> {
     return fs.promises.readFile(this.indexFilePath, 'utf-8').then(JSON.parse);
   }
 
@@ -20,14 +20,13 @@ export abstract class Index<T extends File | string> {
     return this._isUpdated;
   }
 
-  public search(query: string): T[] {
+  public search(query: string): string[] {
     if (!this._isUpdated) {
       throw new Error('Index is not updated');
     }
-    return this._index[query] ?? null;
+    return this._index[query?.toLowerCase()] ?? null;
   }
 
-  // share
   public async update(files?: File[]): Promise<void> {
     if (files) {
       this._index = this.filesToIndex(files);
@@ -43,5 +42,5 @@ export abstract class Index<T extends File | string> {
     this._isUpdated = true;
   }
 
-  protected abstract filesToIndex(files: File[]): Record<string, T[]>;
+  protected abstract filesToIndex(files: File[]): Record<string, string[]>;
 }

@@ -62,9 +62,9 @@ describe('ForwardIndex', () => {
   describe('search', () => {
     const index = new ForwardIndex();
 
-    it('should return words found by filename', async () => {
+    it('should return words found by filename and ignore case', async () => {
       await index.update(files);
-      expect(index.search('file2.txt')).toEqual(['ipsum', '2']);
+      expect(index.search('File2.txt')).toEqual(['ipsum', '2']);
       expect(index.search('file3.txt')).toEqual(['world', 'qwe']);
     });
 
