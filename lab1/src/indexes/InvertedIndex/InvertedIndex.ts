@@ -1,6 +1,6 @@
-import { INVERTED_INDEX_FILE } from './../config';
-import { File } from '../models/File';
-import { Index } from './Index';
+import { INVERTED_INDEX_FILE } from '../../config';
+import { File } from '../../models/File';
+import { Index } from '../Index';
 
 export class InvertedIndex extends Index<File> {
   protected indexFilePath: string;
