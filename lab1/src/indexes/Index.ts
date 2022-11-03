@@ -33,8 +33,7 @@ export abstract class Index {
       // todo: move this to a separate function
       await fs.promises.writeFile(
         this.indexFilePath,
-        // generated with spaces for demo
-        JSON.stringify(this._index, null, 2),
+        JSON.stringify(this._index),
       );
       //
     }
