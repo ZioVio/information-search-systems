@@ -31,10 +31,10 @@ export abstract class Index {
     if (files) {
       this._index = this.filesToIndex(files);
       // todo: move this to a separate function
-      await fs.promises.mkdir(CACHE_DIR);
       await fs.promises.writeFile(
         this.indexFilePath,
-        JSON.stringify(this._index),
+        // generated with spaces for demo
+        JSON.stringify(this._index, null, 2),
       );
       //
     }

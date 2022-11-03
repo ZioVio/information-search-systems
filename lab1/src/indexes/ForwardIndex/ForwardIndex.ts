@@ -10,7 +10,7 @@ export class ForwardIndex extends Index {
     return files.reduce((acc, file) => {
       const { name, content } = file;
       const words = content.split(' ').map(word => word.toLowerCase());
-      acc[name] = words;
+      acc[name.toLowerCase()] = words;
       return acc;
     }, {} as Record<string, string[]>);
   }

@@ -1,3 +1,4 @@
+import { InvertedIndex } from './indexes/InvertedIndex/InvertedIndex';
 /**
  * Class File
  * - name
@@ -31,6 +32,10 @@
  * - index: Map<string, File[]>
  */
 
-import { readFiles } from './readFiles';
+import { ForwardIndex } from './indexes/ForwardIndex';
 
-readFiles().then(console.log);
+const forwardIndex = new ForwardIndex();
+const invertedIndex = new InvertedIndex();
+
+forwardIndex.update().then(() => console.log('forward index loaded'));
+invertedIndex.update().then(() => console.log('inverted index loaded'));
