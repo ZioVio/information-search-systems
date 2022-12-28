@@ -7,6 +7,9 @@ from search import search
 def search_menu(index, content_to_title):
     while True:
         query = input("Search: ")
+        if len(query) == 0:
+            break
+
         results = search(index, query)
 
         print(f"Results for \"{query}\" :\n")
@@ -16,7 +19,8 @@ def search_menu(index, content_to_title):
 
         for i in range(len(results)):
             title = content_to_title[results[i]]
-            print(f"title: [{title}], file: [{results[i]}]\n")
+            filename = results[i]
+            print(f"{filename}: {title}\n")
 
 
 def main():
