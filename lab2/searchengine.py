@@ -9,8 +9,7 @@ def search_menu(index, content_to_title):
         query = input("Search: ")
         results = search(index, query)
 
-        # display query results
-        print(f"Results for [{query}] :\n")
+        print(f"Results for \"{query}\" :\n")
 
         if not len(results):
             print("Not found")
@@ -28,7 +27,7 @@ def main():
     directory = args[0]
 
     if not os.path.exists(directory):
-        return 1
+        return
 
     files = []
 
