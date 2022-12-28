@@ -1,1 +1,0 @@
-export { InvertedIndex } from './InvertedIndex';
