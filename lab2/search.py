@@ -1,4 +1,4 @@
-from utils import map_term
+from utils import normalize
 from common import common
 
 
@@ -10,9 +10,10 @@ def search(index, query):
 
     res = None
     for term_raw in terms_raw:
-        term = map_term(term_raw)
+        term = normalize(term_raw)
 
         term_files = index[term] if term in index.keys() else []
+
         if res is None:
             res = term_files
             continue

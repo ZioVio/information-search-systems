@@ -1,18 +1,16 @@
-from utils import get_file_content, map_term
+from utils import read_file, normalize
 
 
-def create_index(filenames, index, file_titles):
+def create_index(filenames, index, filename_to_title):
     for filename in filenames:
-
-        content = get_file_content(filename)
-        file_titles[filename] = content.split('\n')[0]
-
-        words = content.split()
-        for word in words:
-            mapped_term = map_term(word)
-            if not (mapped_term in index):
-                index[mapped_term] = []
-            if filename not in index[mapped_term]:
-                index[mapped_term].append(filename)
+        content = read_file(filename)
+        filename_to_title[filename] = content.split('\n')[0]
+        terms = content.split()
+        for term in terms:
+            norm_term = normalize(term)
+            if norm_term not in index:
+                index[norm_term] = []
+            if filename not in index[norm_term]:
+                index[norm_term].append(filename)
 
     return 0

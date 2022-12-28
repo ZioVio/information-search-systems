@@ -33,19 +33,17 @@ def main():
     files = []
 
     for filename in os.listdir(directory):
-        if filename.endswith('.txt'):
-            files.append(os.path.join(directory, filename))
+        files.append(os.path.join(directory, filename))
 
     index = {}
-    content_to_title = {}
-    create_index(files, index, content_to_title)
+    filename_to_title = {}
+    create_index(files, index, filename_to_title)
 
-    # Either allow the user to search using the index, or just print the index
     if num_args == 2 and args[1] == '-s':
-        search_menu(index, content_to_title)
+        search_menu(index, filename_to_title)
     else:
         print('index: ', index)
-        print('\ntitles: ', content_to_title)
+        print('\ntitles: ', filename_to_title)
 
 
 if __name__ == '__main__':
